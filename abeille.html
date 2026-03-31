@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'abeille — Exposition Insectes | PNDA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pnda-red: #CB2126;
+            --pnda-dark-blue: #003660;
+            --pnda-light: #f5f6f8;
+            --pnda-white: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--pnda-light);
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .card {
+            background: var(--pnda-white);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 54, 96, 0.10);
+            max-width: 420px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--pnda-dark-blue);
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .card-header .school-name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 0.25rem;
+        }
+
+        .card-header .expo-title {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .card-body {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .insect-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1;
+        }
+
+        .insect-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--pnda-dark-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .insect-subtitle {
+            font-size: 0.85rem;
+            color: #6b7b8d;
+            margin-bottom: 2rem;
+        }
+
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: var(--pnda-red);
+            color: var(--pnda-white);
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .play-btn:hover {
+            background: #a91b1f;
+        }
+
+        .play-btn:active {
+            transform: scale(0.97);
+        }
+
+        .play-btn .play-icon {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .play-btn.playing {
+            background: var(--pnda-dark-blue);
+        }
+
+        .audio-controls {
+            margin-top: 1.5rem;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 20px;
+        }
+
+        .status-text {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #6b7b8d;
+            min-height: 1.2em;
+        }
+
+        .card-footer {
+            border-top: 1px solid #eaedf1;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        .card-footer p {
+            font-size: 0.7rem;
+            color: #98a5b3;
+            letter-spacing: 0.03em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="card-header">
+        <div class="school-name">Pensionnat Notre-Dame-des-Anges</div>
+        <div class="expo-title">Exposition — Nos insectes</div>
+    </div>
+
+    <div class="card-body">
+        <div class="insect-icon">🐝</div>
+        <h1 class="insect-name">L'abeille</h1>
+        <p class="insect-subtitle">Présenté par les élèves de Mme Exemple</p>
+
+        <button class="play-btn" id="playBtn" onclick="togglePlay()">
+            <svg class="play-icon" viewBox="0 0 24 24" id="btnIcon">
+                <polygon points="6,3 20,12 6,21" />
+            </svg>
+            <span id="btnText">Écouter</span>
+        </button>
+
+        <div class="audio-controls">
+            <audio id="audioPlayer" controls preload="auto">
+                <!-- 
+                    Remplacer XXXXXXXXX par l'ID Google Drive du fichier MP3.
+                    Exemple : si le lien de partage est 
+                    https://drive.google.com/file/d/1aBcDeFgHiJkLmN/view
+                    alors l'ID est 1aBcDeFgHiJkLmN
+                -->
+                <source src="https://drive.google.com/uc?export=download&id=XXXXXXXXX" type="audio/mpeg">
+                Votre navigateur ne supporte pas la lecture audio.
+            </audio>
+        </div>
+
+        <p class="status-text" id="statusText"></p>
+    </div>
+
+    <div class="card-footer">
+        <p>Scannez le code QR à côté de chaque maquette pour en apprendre plus !</p>
+    </div>
+</div>
+
+<script>
+    const audio = document.getElementById('audioPlayer');
+    const playBtn = document.getElementById('playBtn');
+    const btnText = document.getElementById('btnText');
+    const btnIcon = document.getElementById('btnIcon');
+    const statusText = document.getElementById('statusText');
+
+    const playIconSVG = '<polygon points="6,3 20,12 6,21" />';
+    const pauseIconSVG = '<rect x="5" y="3" width="4" height="18" /><rect x="15" y="3" width="4" height="18" />';
+
+    // Tenter l'autoplay
+    window.addEventListener('DOMContentLoaded', () => {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                updateUI(true);
+                statusText.textContent = 'Lecture en cours…';
+            }).catch(() => {
+                updateUI(false);
+                statusText.textContent = 'Appuyez sur Écouter pour démarrer.';
+            });
+        }
+    });
+
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play().then(() => {
+                updateUI(true);
+                statusText.textContent = 'Lecture en cours…';
+            });
+        } else {
+            audio.pause();
+            updateUI(false);
+            statusText.textContent = '';
+        }
+    }
+
+    function updateUI(isPlaying) {
+        if (isPlaying) {
+            playBtn.classList.add('playing');
+            btnText.textContent = 'Pause';
+            btnIcon.innerHTML = pauseIconSVG;
+        } else {
+            playBtn.classList.remove('playing');
+            btnText.textContent = 'Écouter';
+            btnIcon.innerHTML = playIconSVG;
+        }
+    }
+
+    audio.addEventListener('play', () => updateUI(true));
+    audio.addEventListener('pause', () => updateUI(false));
+    audio.addEventListener('ended', () => {
+        updateUI(false);
+        statusText.textContent = 'Lecture terminée.';
+    });
+</script>
+
+</body>
+</html>
