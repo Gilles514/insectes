@@ -82,10 +82,55 @@
         .insect-subtitle {
             font-size: 0.85rem;
             color: #6b7b8d;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        .play-btn {
+        .help-text {
+            font-size: 0.85rem;
+            color: var(--pnda-dark-blue);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .help-text strong {
+            color: var(--pnda-red);
+        }
+
+        /* Lecteur Google Drive intégré */
+        .drive-player {
+            width: 100%;
+            height: 80px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        /* Séparateur */
+        .separator {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            color: #98a5b3;
+            font-size: 0.75rem;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #eaedf1;
+        }
+
+        .fallback-text {
+            font-size: 0.8rem;
+            color: #6b7b8d;
+            margin-bottom: 1rem;
+        }
+
+        /* Bouton de repli */
+        .open-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -94,48 +139,28 @@
             color: var(--pnda-white);
             border: none;
             border-radius: 50px;
-            padding: 1rem 2.5rem;
+            padding: 0.85rem 2rem;
             font-family: 'Poppins', sans-serif;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s ease, transform 0.15s ease;
+            text-decoration: none;
             -webkit-tap-highlight-color: transparent;
         }
 
-        .play-btn:hover {
+        .open-btn:hover {
             background: #a91b1f;
         }
 
-        .play-btn:active {
+        .open-btn:active {
             transform: scale(0.97);
         }
 
-        .play-btn .play-icon {
-            width: 22px;
-            height: 22px;
+        .open-btn svg {
+            width: 20px;
+            height: 20px;
             fill: currentColor;
-        }
-
-        .play-btn.playing {
-            background: var(--pnda-dark-blue);
-        }
-
-        .audio-controls {
-            margin-top: 1.5rem;
-        }
-
-        audio {
-            width: 100%;
-            height: 40px;
-            border-radius: 20px;
-        }
-
-        .status-text {
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            color: #6b7b8d;
-            min-height: 1.2em;
         }
 
         .card-footer {
@@ -164,90 +189,33 @@
         <h1 class="insect-name">L'abeille</h1>
         <p class="insect-subtitle">Présenté par les élèves de Mme Andréanne</p>
 
-        <button class="play-btn" id="playBtn" onclick="togglePlay()">
-            <svg class="play-icon" viewBox="0 0 24 24" id="btnIcon">
+        <p class="help-text">Appuyez sur <strong>▶</strong> pour écouter la présentation.</p>
+
+        <!-- Lecteur intégré Google Drive via iframe preview -->
+        <iframe 
+            class="drive-player"
+            src="https://drive.google.com/file/d/1Q4JvyNq3ZqqTjJKZOdGpcP0GJj5IbEnK/preview"
+            allow="autoplay"
+        ></iframe>
+
+        <div class="separator">ou</div>
+
+        <p class="fallback-text">Si le lecteur ne s'affiche pas, appuyez ici :</p>
+
+        <a class="open-btn" 
+           href="https://drive.google.com/file/d/1Q4JvyNq3ZqqTjJKZOdGpcP0GJj5IbEnK/view" 
+           target="_blank">
+            <svg viewBox="0 0 24 24">
                 <polygon points="6,3 20,12 6,21" />
             </svg>
-            <span id="btnText">Écouter</span>
-        </button>
-
-        <div class="audio-controls">
-            <audio id="audioPlayer" controls preload="auto">
-                <!-- 
-                    Remplacer XXXXXXXXX par l'ID Google Drive du fichier MP3.
-                    Exemple : si le lien de partage est 
-                    https://drive.google.com/file/d/1aBcDeFgHiJkLmN/view
-                    alors l'ID est 1aBcDeFgHiJkLmN
-                -->
-                <source src="https://drive.google.com/uc?export=download&id=XXXXXXXXX" type="audio/mpeg">
-                Votre navigateur ne supporte pas la lecture audio.
-            </audio>
-        </div>
-
-        <p class="status-text" id="statusText"></p>
+            <span>Ouvrir dans Google Drive</span>
+        </a>
     </div>
 
     <div class="card-footer">
         <p>Scannez le code QR à côté de chaque maquette pour en apprendre plus !</p>
     </div>
 </div>
-
-<script>
-    const audio = document.getElementById('audioPlayer');
-    const playBtn = document.getElementById('playBtn');
-    const btnText = document.getElementById('btnText');
-    const btnIcon = document.getElementById('btnIcon');
-    const statusText = document.getElementById('statusText');
-
-    const playIconSVG = '<polygon points="6,3 20,12 6,21" />';
-    const pauseIconSVG = '<rect x="5" y="3" width="4" height="18" /><rect x="15" y="3" width="4" height="18" />';
-
-    // Tenter l'autoplay
-    window.addEventListener('DOMContentLoaded', () => {
-        const playPromise = audio.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                updateUI(true);
-                statusText.textContent = 'Lecture en cours…';
-            }).catch(() => {
-                updateUI(false);
-                statusText.textContent = 'Appuyez sur Écouter pour démarrer.';
-            });
-        }
-    });
-
-    function togglePlay() {
-        if (audio.paused) {
-            audio.play().then(() => {
-                updateUI(true);
-                statusText.textContent = 'Lecture en cours…';
-            });
-        } else {
-            audio.pause();
-            updateUI(false);
-            statusText.textContent = '';
-        }
-    }
-
-    function updateUI(isPlaying) {
-        if (isPlaying) {
-            playBtn.classList.add('playing');
-            btnText.textContent = 'Pause';
-            btnIcon.innerHTML = pauseIconSVG;
-        } else {
-            playBtn.classList.remove('playing');
-            btnText.textContent = 'Écouter';
-            btnIcon.innerHTML = playIconSVG;
-        }
-    }
-
-    audio.addEventListener('play', () => updateUI(true));
-    audio.addEventListener('pause', () => updateUI(false));
-    audio.addEventListener('ended', () => {
-        updateUI(false);
-        statusText.textContent = 'Lecture terminée.';
-    });
-</script>
 
 </body>
 </html>
