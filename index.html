@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exposition Insectes | PNDA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --pnda-red: #CB2126;
+            --pnda-dark-blue: #003660;
+            --pnda-light: #f5f6f8;
+            --pnda-white: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--pnda-light);
+            min-height: 100dvh; padding: 2rem 1.5rem;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        .header {
+            background: var(--pnda-dark-blue);
+            border-radius: 16px; padding: 2rem; text-align: center;
+            margin-bottom: 1.5rem; color: var(--pnda-white);
+        }
+        .header .school-name {
+            font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: rgba(255,255,255,0.65); margin-bottom: 0.5rem;
+        }
+        .header h1 { font-size: 1.6rem; font-weight: 700; }
+        .header p { font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-top: 0.5rem; }
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+        .insect-link {
+            background: var(--pnda-white); border-radius: 12px;
+            padding: 1.5rem 1rem; text-align: center; text-decoration: none;
+            box-shadow: 0 2px 12px rgba(0,54,96,0.08);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .insect-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,54,96,0.15);
+        }
+        .insect-link .emoji { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+        .insect-link .name { font-size: 0.9rem; font-weight: 600; color: var(--pnda-dark-blue); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="school-name">Pensionnat Notre-Dame-des-Anges</div>
+        <h1>Exposition — Nos insectes</h1>
+        <p>Présenté par les élèves de Mme Andréanne</p>
+    </div>
+    <div class="grid">
+        <a class="insect-link" href="abeille.html"><span class="emoji">🐝</span><span class="name">Abeille</span></a>
+        <a class="insect-link" href="cigale.html"><span class="emoji">🦗</span><span class="name">Cigale</span></a>
+        <a class="insect-link" href="coccinelle.html"><span class="emoji">🐞</span><span class="name">Coccinelle</span></a>
+        <a class="insect-link" href="coquerelle.html"><span class="emoji">🪳</span><span class="name">Coquerelle</span></a>
+        <a class="insect-link" href="escargot.html"><span class="emoji">🐌</span><span class="name">Escargot</span></a>
+        <a class="insect-link" href="fourmi.html"><span class="emoji">🐜</span><span class="name">Fourmi</span></a>
+        <a class="insect-link" href="libellule.html"><span class="emoji">🪰</span><span class="name">Libellule</span></a>
+        <a class="insect-link" href="luciole.html"><span class="emoji">✨</span><span class="name">Luciole</span></a>
+        <a class="insect-link" href="moustique.html"><span class="emoji">🦟</span><span class="name">Moustique</span></a>
+        <a class="insect-link" href="papillon.html"><span class="emoji">🦋</span><span class="name">Papillon</span></a>
+        <a class="insect-link" href="phasme.html"><span class="emoji">🌿</span><span class="name">Phasme</span></a>
+        <a class="insect-link" href="pyrops.html"><span class="emoji">🐛</span><span class="name">Pyrops candelaria</span></a>
+        <a class="insect-link" href="sauterelle.html"><span class="emoji">🦗</span><span class="name">Sauterelle</span></a>
+        <a class="insect-link" href="ver-de-terre.html"><span class="emoji">🪱</span><span class="name">Ver de terre</span></a>
+    </div>
+</div>
+</body>
+</html>

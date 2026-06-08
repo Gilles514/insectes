@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyrops candelaria — Exposition Insectes | PNDA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --pnda-red: #CB2126;
+            --pnda-dark-blue: #003660;
+            --pnda-light: #f5f6f8;
+            --pnda-white: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--pnda-light);
+            min-height: 100dvh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+        .card {
+            background: var(--pnda-white);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 54, 96, 0.10);
+            max-width: 420px; width: 100%; overflow: hidden;
+        }
+        .card-header {
+            background: var(--pnda-dark-blue);
+            padding: 1.5rem 2rem; text-align: center;
+        }
+        .card-header .school-name {
+            font-size: 0.7rem; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65); margin-bottom: 0.25rem;
+        }
+        .card-header .expo-title {
+            font-size: 0.85rem; font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .card-body { padding: 2rem; text-align: center; }
+        .insect-icon { font-size: 3.5rem; margin-bottom: 0.75rem; line-height: 1; }
+        .insect-name {
+            font-size: 1.75rem; font-weight: 700;
+            color: var(--pnda-dark-blue); margin-bottom: 0.25rem;
+        }
+        .insect-subtitle {
+            font-size: 0.85rem; color: #6b7b8d; margin-bottom: 1.5rem;
+        }
+        .help-text {
+            font-size: 0.85rem; color: var(--pnda-dark-blue);
+            margin-bottom: 1.25rem; line-height: 1.5;
+        }
+        .help-text strong { color: var(--pnda-red); }
+        .drive-player {
+            width: 100%; height: 80px; border: none;
+            border-radius: 8px; margin-bottom: 1rem;
+        }
+        .separator {
+            display: flex; align-items: center; gap: 1rem;
+            margin: 1rem 0; color: #98a5b3; font-size: 0.75rem;
+        }
+        .separator::before, .separator::after {
+            content: ''; flex: 1; height: 1px; background: #eaedf1;
+        }
+        .fallback-text { font-size: 0.8rem; color: #6b7b8d; margin-bottom: 1rem; }
+        .open-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 0.6rem; background: var(--pnda-red); color: var(--pnda-white);
+            border: none; border-radius: 50px; padding: 0.85rem 2rem;
+            font-family: 'Poppins', sans-serif; font-size: 0.95rem;
+            font-weight: 600; cursor: pointer; text-decoration: none;
+            transition: background 0.2s ease, transform 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .open-btn:hover { background: #a91b1f; }
+        .open-btn:active { transform: scale(0.97); }
+        .open-btn svg { width: 20px; height: 20px; fill: currentColor; }
+        .card-footer {
+            border-top: 1px solid #eaedf1; padding: 1rem 2rem; text-align: center;
+        }
+        .card-footer p { font-size: 0.7rem; color: #98a5b3; letter-spacing: 0.03em; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="card-header">
+        <div class="school-name">Pensionnat Notre-Dame-des-Anges</div>
+        <div class="expo-title">Exposition — Nos insectes</div>
+    </div>
+    <div class="card-body">
+        <div class="insect-icon">🐛</div>
+        <h1 class="insect-name">Pyrops candelaria</h1>
+        <p class="insect-subtitle">Présenté par les élèves de Mme Andréanne</p>
+        <p class="help-text">Appuyez sur <strong>▶</strong> pour écouter la présentation.</p>
+        <iframe class="drive-player"
+            src="https://drive.google.com/file/d/1L275N_c3ClJ4ViJgnavzMie6OnIps8q4/preview"
+            allow="autoplay"></iframe>
+        <div class="separator">ou</div>
+        <p class="fallback-text">Si le lecteur ne s'affiche pas, appuyez ici :</p>
+        <a class="open-btn"
+           href="https://drive.google.com/file/d/1L275N_c3ClJ4ViJgnavzMie6OnIps8q4/view"
+           target="_blank">
+            <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21" /></svg>
+            <span>Ouvrir l'enregistrement</span>
+        </a>
+    </div>
+    <div class="card-footer">
+        <p>Exposition des insectes — Mme Andréanne</p>
+    </div>
+</div>
+</body>
+</html>
